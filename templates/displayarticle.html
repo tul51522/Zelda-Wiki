@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1 class="text-4xl font-bold mb-4">{{ info[0] }}</h1>
+
+    <div class="flex items-center">
+        <p class="mr-4">{{info[2]}}</p>
+        <img src=" {{ info[1]}} ", class="w-64 h-64 object-cover">
+    
+    </div>
+
+{% endblock %}

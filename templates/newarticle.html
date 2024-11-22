@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <form action="{{ url_for('newarticle')}}" method="post">
+        <label for="subject">Article Subject: </label>
+        <input type="text" id="subject" name="asubject" placeholder="Article Name">
+        <label for="imageurl">Image URL: </label>
+        <input type="url" id="imageurl" name="iurl" placeholder="URL">
+        <label for="content">Content: </label>
+        <input type="text" id="content" name="acontent" placeholder="Article Content">
+    <button type="submit">Submit Article</button>
+
+{%endblock%}
