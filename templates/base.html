@@ -3,12 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Zelda Wiki</title>
+    <title>Zelda Wiki  {% block title %} {% endblock %}</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
 </head>
 <body class="bg-gray-100 text-gray-900">
+    <div class="fixed top-4 right-4 z-50">
+        <img src="https://static.wikia.nocookie.net/legendofzelda/images/7/78/OoT_Link_Portrait.png/revision/latest?cb=20201027170949&path-prefix=zh-tw" alt="Logo" class="w-16 h-auto">
+    </div>
     <header class="bg-green-700 text-white p-4">
+    
         <h1 class="text-3xl font-bold">Zelda Wiki</h1>
         <nav class="mt-2">
             <ul class="flex space-x-4">
@@ -25,7 +29,7 @@
 
     {% endblock %}
 
-    <footer class="bg-blue-800 text-white p-4 mt-8">
+    <footer class="bg-green-700 text-white p-4 mt-8">
         <p>&copy; 2024 Zelda Wiki. All rights reserved.</p>
     </footer>
 </body>

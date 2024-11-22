@@ -1,6 +1,42 @@
 {% extends 'base.html' %}
+{% block title %} {{Guide}}Guide {% endblock %}
 
 {% block content %}
-    <h1>Guides</h1>
+<h1 class="text-4xl font-bold text-green-700 mb-4">Guide</h1>
+
+<nav class="text-2xl mb-8">
+    <ul class="list-disc list-inside">
+        <li><a href="#ocarinaOfTime" class="text-green-700 hover:underline">Ocarina of Time</a></li>
+        <li><a href="#majorasMask" class="text-green-700 hover:underline">Majoras Mask</a></li>
+        <li><a href="#windWaker" class="text-green-700 hover:underline">Wind Waker</a></li>
+        <li><a href="#twilightPrincess" class="text-green-700 hover:underline">Twilight Princess</a></li>
+        <li><a href="#skywardSword" class="text-green-700 hover:underline">Skyward Sword</a></li>
+        <li><a href="#breathOfTheWild" class="text-green-700 hover:underline">Breath of the Wild</a></li>
+        <li><a href="#tearsOfTheKingdom" class="text-green-700 hover:underline">Tears of the Kingdom</a></li>
+    </ul>
+</nav>
+
+<section id="ocarinaOfTime" class="my-8">
+    <h2 class="text-2xl font-semibold mb-4">Ocarina of Time</h2>
+    <section id="mainQuests" class="my-8">
+        <h3 class="text-xl font-semibold mb-4">Main Quests</h3>
+        <p class="text-lg">upload your content</p>
+    </section>
+    <section id="sideQuests" class="my-8">
+        <h3 class="text-xl font-semibold mb-4">Side Quests</h3>
+        <p class="text-lg">upload your content</p>
+    </section>
+    <section id="collection" class="my-8">
+        <h3 class="text-xl font-semibold mb-4">Collection</h3>
+        <p class="text-lg">upload your content</p>
+    </section>
+    <section id="easterEgg" class="my-8">
+        <h3 class="text-xl font-semibold mb-4">Easter Egg</h3>
+        <p class="text-lg">upload your content</p>
+    </section>
+</section>
+
+    
+
 
 {%endblock%}

@@ -1,8 +1,9 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<main class="p-6">
-    <section id="home" class="my-8">
+<h1 class="text-4xl font-bold text-green-700 mb-4">Home</h1>
+<main class="p-2">
+    <section id="home" class="my-4">
         <h2 class="text-2xl font-semibold mb-4">Welcome to the Zelda Wiki!</h2>
         <p class="text-lg">Your ultimate guide to every Zelda game. Find maps, walkthroughs, and learn all the secrets hidden throughout the Zelda universe.</p>
     </section>
@@ -11,7 +12,7 @@
         <h2 class="text-2xl font-semibold mb-4">Featured Guides & Tips</h2>
         <div class="bg-white p-4 rounded shadow-md">
             <ul class="list-disc pl-5">
-                <li class="mb-2">Explore the complete map of Hyrule from <strong>The Legend of Zelda: Breath of the Wild</strong>.</li>
+                <li class="mb-2">Explore the complete map of Hyrule.</li>
                 <li class="mb-2">Learn how to defeat the toughest bosses with our in-depth boss guides.</li>
                 <li class="mb-2">Discover the hidden Easter eggs scattered throughout the series.</li>
             </ul>
@@ -29,7 +30,7 @@
         <h2 class="text-2xl font-semibold mb-4">Community Highlights</h2>
         <div class="bg-white p-4 rounded shadow-md">
             <p>Share your own experiences, guides, or stories with the Zelda community. We love hearing from fans like you!</p>
-            <button @click="showForm = !showForm" class="mt-4 bg-blue-800 text-white py-2 px-4 rounded hover:bg-blue-700">Share Your Content</button>
+            <button @click="showForm = !showForm" class="mt-4 bg-green-700 text-white py-2 px-4 rounded hover:bg-green-600">Share Your Content</button>
             <div x-show="showForm" class="mt-4 p-4 border border-gray-300 rounded">
                 <form>
                     <label class="block mb-2">Title:</label>
