@@ -1,6 +1,47 @@
 {% extends 'base.html' %}
-
+{% block title %}Canon{% endblock %}
 {% block content %}
-    <h1>Zelda Canon</h1>
+<h1 class="text-4xl font-bold text-green-700 ">Zelda Canon</h1>
+
+<nav class="mt-2">
+    <ul class="flex space-x-4">
+        {% for canon in canons %}
+            <li>
+                <a href="/canon/{{ canon }}" class="text-black-600 hover:underline">{{ canon | replace("_", " ") | title }}</a>
+            </li>
+        {% endfor %}
+    </ul>
+</nav>
+
+{% if selected_canon %}
+    <section id="canon-detail" class="my-8">
+        <h2 class="text-3xl font-bold mb-4">{{ selected_canon | replace("_", " ") | title }} in Zelda</h2>
+
+        {% if selected_canon == "timeline" %}
+            <section class="my-8">
+                <p class="text-lg">...</p>
+            </section>
+        {% elif selected_canon == "characters" %}
+            <section class="my-8">
+                <p class="text-lg">...</p>
+            </section>
+        {% elif selected_canon == "events" %}
+            <section class="my-8">
+                <p class="text-lg">...</p>
+            </section>
+        {% elif selected_canon == "myths" %}
+            <section class="my-8">
+                <p class="text-lg">...</p>
+            </section>
+        {% else %}
+            <p class="text-lg text-red-600">The requested canon category does not exist.</p>
+        {% endif %}
+    </section>
+{% else %}
+    <p class="text-4xl text-black-600 mt-8">Please select a canon category.</p>
+    <img src="https://gamebuster.sg/cdn/shop/files/61slK3QViuL._AC_SX679.jpg?v=1706263524&width=480"class="w-64 h-64">
+{% endif %}
+
+    
 
 {%endblock%}
