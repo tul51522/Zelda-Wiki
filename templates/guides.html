@@ -1,6 +1,149 @@
 {% extends 'base.html' %}
-
+{% block title %} Guide {% endblock %}
 {% block content %}
-    <h1>Guides</h1>
+<h1 class="text-4xl font-bold text-green-700 ">Guide</h1>
 
+<nav class="mt-2">
+    <ul class="flex space-x-4">
+        {% for game in games %}
+            <li>
+                <a href="/guides/{{ game }}" class="text-black-600 hover:underline">{{ game | replace("_", " ") | title }}</a>
+            </li>
+        {% endfor %}
+    </ul>
+</nav>
+
+{% if selected_game %}
+    <section id="game-guide" class="my-8">
+        <h2 class="text-3xl font-bold mb-4">{{ selected_game | replace("_", " ") | title }} Guide</h2>
+
+        {% if selected_game == "ocarina_of_time" %}
+            <section class="my-8">
+                <h3 class="text-2xl font-semibold mb-4">Main Quests</h3>
+                <p class="text-lg">...</p>
+            </section>
+            <section class="my-8">
+                <h3 class="text-2xl font-semibold mb-4">Side Quests</h3>
+                <p class="text-lg">...</p>
+            </section>
+            <section class="my-8">
+                <h3 class="text-2xl font-semibold mb-4">Collection</h3>
+                <p class="text-lg">...</p>
+            </section>
+            <section class="my-8">
+                <h3 class="text-2xl font-semibold mb-4">Easter Egg</h3>
+                <p class="text-lg">...</p>
+            </section>
+        {% elif selected_game == "majoras_mask" %}
+           <section class="my-8">
+                <h3 class="text-2xl font-semibold mb-4">Main Quests</h3>
+                <p class="text-lg">...</p>
+            </section>
+            <section class="my-8">
+                <h3 class="text-2xl font-semibold mb-4">Side Quests</h3>
+                <p class="text-lg">...</p>
+            </section>
+            <section class="my-8">
+                <h3 class="text-2xl font-semibold mb-4">Collection</h3>
+                <p class="text-lg">...</p>
+            </section>
+            <section class="my-8">
+                <h3 class="text-2xl font-semibold mb-4">Easter Egg</h3>
+                <p class="text-lg">...</p>
+            </section>
+        {% elif selected_game == "wind_waker" %}
+            <section class="my-8">
+                <h3 class="text-2xl font-semibold mb-4">Main Quests</h3>
+                <p class="text-lg">...</p>
+            </section>
+            <section class="my-8">
+                <h3 class="text-2xl font-semibold mb-4">Side Quests</h3>
+                <p class="text-lg">...</p>
+            </section>
+            <section class="my-8">
+                <h3 class="text-2xl font-semibold mb-4">Collection</h3>
+                <p class="text-lg">...</p>
+            </section>
+            <section class="my-8">
+                <h3 class="text-2xl font-semibold mb-4">Easter Egg</h3>
+                <p class="text-lg">...</p>
+            </section>
+        {% elif selected_game == "twilight_princess" %}
+            <section class="my-8">
+                <h3 class="text-2xl font-semibold mb-4">Main Quests</h3>
+                <p class="text-lg">...</p>
+            </section>
+            <section class="my-8">
+                <h3 class="text-2xl font-semibold mb-4">Side Quests</h3>
+                <p class="text-lg">...</p>
+            </section>
+            <section class="my-8">
+                <h3 class="text-2xl font-semibold mb-4">Collection</h3>
+                <p class="text-lg">...</p>
+            </section>
+            <section class="my-8">
+                <h3 class="text-2xl font-semibold mb-4">Easter Egg</h3>
+                <p class="text-lg">...</p>
+            </section>
+        {% elif selected_game == "skyward_sword" %}
+            <section class="my-8">
+                <h3 class="text-2xl font-semibold mb-4">Main Quests</h3>
+                <p class="text-lg">...</p>
+            </section>
+            <section class="my-8">
+                <h3 class="text-2xl font-semibold mb-4">Side Quests</h3>
+                <p class="text-lg">...</p>
+            </section>
+            <section class="my-8">
+                <h3 class="text-2xl font-semibold mb-4">Collection</h3>
+                <p class="text-lg">...</p>
+            </section>
+            <section class="my-8">
+                <h3 class="text-2xl font-semibold mb-4">Easter Egg</h3>
+                <p class="text-lg">...</p>
+            </section>
+        {% elif selected_game == "breath_of_the_wild" %}
+            <section class="my-8">
+                <h3 class="text-2xl font-semibold mb-4">Main Quests</h3>
+                <p class="text-lg">...</p>
+            </section>
+            <section class="my-8">
+                <h3 class="text-2xl font-semibold mb-4">Side Quests</h3>
+                <p class="text-lg">...</p>
+            </section>
+            <section class="my-8">
+                <h3 class="text-2xl font-semibold mb-4">Collection</h3>
+                <p class="text-lg">...</p>
+            </section>
+            <section class="my-8">
+                <h3 class="text-2xl font-semibold mb-4">Easter Egg</h3>
+                <p class="text-lg">...</p>
+            </section>
+        {% elif selected_game == "tears_of_the_kingdom" %}
+            <section class="my-8">
+                <h3 class="text-2xl font-semibold mb-4">Main Quests</h3>
+                <p class="text-lg">...</p>
+            </section>
+            <section class="my-8">
+                <h3 class="text-2xl font-semibold mb-4">Side Quests</h3>
+                <p class="text-lg">...</p>
+            </section>
+            <section class="my-8">
+                <h3 class="text-2xl font-semibold mb-4">Collection</h3>
+                <p class="text-lg">...</p>
+            </section>
+            <section class="my-8">
+                <h3 class="text-2xl font-semibold mb-4">Easter Egg</h3>
+                <p class="text-lg">...</p>
+            </section>
+        {% else %}
+            <section class="my-8">
+                <h3 class="text-2xl font-semibold mb-4">Guide Not Found</h3>
+                <p class="text-lg">not available.</p>
+            </section>
+        {% endif %}
+    </section>
+{% endif %}
+<p class="text-4xl text-black-600 mt-8">Please select a Game.</p>
+<img src="https://gamebuster.sg/cdn/shop/files/61slK3QViuL._AC_SX679.jpg?v=1706263524&width=480" class="w-64 h-64">
 {%endblock%}
