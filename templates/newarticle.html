@@ -2,6 +2,25 @@
 
 {% block content %}
     <form action="{{ url_for('newarticle')}}" method="post">
+        <label for="game"> Choose an Article Type</label>
+        <select name="articletype" id="articletype">
+            <option value="guide">Guide</option>
+            <option value="canon">Canon</option>
+        </select>
+
+        <label for="info" id="infotext"></label>
+        <select name="info" id="info">
+            <!-- Options will be populated based on the selected article type -->
+        </select>
+        <div id="guide-dropdown" style="display: none;">
+            <label for="guidetype">Choose the Guide Type</label>
+            <select name="guidetype" id="guidetype">
+                <option value="Main Quest">Main Quest</option>
+                <option value="Side Quest">Side Quest</option>
+                <option value="Collections">Collections</option>
+                <option value="Easter Eggs">Easter Eggs</option>
+            </select>
+        </div>
         <label for="subject">Article Subject: </label>
         <input type="text" id="subject" name="asubject" placeholder="Article Name">
         <label for="imageurl">Image URL: </label>
@@ -9,5 +28,38 @@
         <label for="content">Content: </label>
         <input type="text" id="content" name="acontent" placeholder="Article Content">
     <button type="submit">Submit Article</button>
+
+    <script>
+        document.getElementById("articletype").addEventListener("change", updateItems);
+
+        function updateItems() {
+            const articleType = document.getElementById("articletype").value;
+            const itemsDropdown = document.getElementById("info");
+            const guideDropdown = document.getElementById("guide-dropdown");
+            const infoText = document.getElementById("infotext");
+
+            itemsDropdown.innerHTML = "";
+
+            let options = [];
+
+            if (articleType === "guide") {
+                guideDropdown.style.display = "block";
+                infoText.innerText = "Select Guide Type"
+                options = ["Ocarina of Time", "Majoras Mask", "Wind Waker", "Twilight Princess", "Skyward Sword", "Breath of the Wild", "Tears of the Kingdom"]; 
+            } else if (articleType === "canon") {
+                guideDropdown.style.display = "none";
+                infoText.innerText = "Select Canon Type"
+                options = ["Characters", "Timeline", "Events", "Myths"]; 
+            }
+
+            options.forEach(optionText => {
+                const optionElement = document.createElement("option");
+                optionElement.textContent = optionText;
+                itemsDropdown.appendChild(optionElement);
+            });
+        }
+
+        updateItems();
+    </script>
 
 {%endblock%}
