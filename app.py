@@ -47,7 +47,7 @@ def guides_type(name):
     if name not in games:
         name = None
     cursor = mysql.connection.cursor()
-    cursor.execute(''' SELECT * FROM ARTICLES WHERE GAME = %s AND ARTICLETYPE = GUIDE''',(name))
+    cursor.execute(''' SELECT * FROM ARTICLES WHERE ARTICLEINFO = %s AND ARTICLETYPE = %s''',(name, "guide"))
     articles = cursor.fetchall()
     cursor.close()
     return render_template('guides.html', games=games, selected_game=name, articles=articles)
@@ -80,7 +80,10 @@ def newarticle():
        article_subject = request.form.get("asubject")
        imageurl = request.form.get("iurl") 
        content = request.form.get("acontent")
-       cursor.execute(''' INSERT INTO articles VALUES(%s,%s, %s, 1)''',(article_subject, imageurl, content))
+       articletype = request.form.get("articletype")
+       articleinfo = request.form.get("info")
+       guidetype = request.form.get("guidetype")
+       cursor.execute(''' INSERT INTO articles VALUES(%s,%s, %s, 1, %s, %s, %s)''',(article_subject, imageurl, content, articletype, articleinfo, guidetype))
        mysql.connection.commit()
        cursor.close()
        return redirect(url_for('index'))
