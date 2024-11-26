@@ -9,9 +9,26 @@
 </head>
 <body class="bg-gray-100 text-gray-900">
     <header class="bg-green-700 text-white p-4">
-    
-        <h1 class="text-3xl font-bold">Zelda Wiki</h1>
-        <nav class="mt-2">
+        <!-- Container for title and navigation, using flex layout -->
+        <div class="flex justify-between items-center">
+            <h1 class="text-3xl font-bold">Zelda Wiki</h1>
+            
+            <!-- Right-aligned navigation (Login, Logout, etc.) -->
+            <nav class="flex space-x-4">
+                <ul class="flex space-x-4">
+                    {% if current_user.is_authenticated %}
+                        <li><a href="/profile" class="hover:underline">Profile</a></li>
+                        <li><a href="/logout" class="hover:underline">Logout</a></li>
+                    {% else %}
+                        <li><a href="/login" class="hover:underline">Login</a></li>
+                        <li><a href="/register" class="hover:underline">Register</a></li>
+                    {% endif %}
+                </ul>
+            </nav>
+        </div>
+        
+        <!-- Main navigation under the title (Home, Maps, Guides, etc.) -->
+        <nav class="flex space-x-4 mt-2">
             <ul class="flex space-x-4">
                 <li><a href="/" class="hover:underline">Home</a></li>
                 <li><a href="/maps" class="hover:underline">Maps</a></li>
@@ -21,6 +38,7 @@
             </ul>
         </nav>
     </header>
+
 
     {% block content %}
 
