@@ -7,7 +7,7 @@
     <ul class="flex space-x-4">
         {% for canon in canons %}
             <li>
-                <a href="/canon/{{ canon }}" class="text-black-600 hover:underline">{{ canon | replace("_", " ") | title }}</a>
+                <a href="/canon/{{ canon }}" class="text-black-600 hover:underline">{{ canon }}</a>
             </li>
         {% endfor %}
     </ul>
@@ -15,7 +15,7 @@
 
 {% if selected_canon %}
     <section id="canon-detail" class="my-8">
-        <h2 class="text-3xl font-bold mb-4">{{ selected_canon | replace("_", " ") | title }} in Zelda</h2>
+        <h2 class="text-3xl font-bold mb-4">{{ selected_canon }} in Zelda</h2>
 
         {% if selected_canon == "timeline" %}
             <section class="my-8">
