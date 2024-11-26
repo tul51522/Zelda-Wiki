@@ -7,7 +7,7 @@
     <ul class="flex space-x-4">
         {% for game in games %}
             <li>
-                <a href="/guides/{{ game }}" class="text-black-600 hover:underline">{{ game | replace("_", " ") | title }}</a>
+                <a href="/guides/{{ game }}" class="text-black-600 hover:underline">{{ game | replace("_", " ") }}</a>
             </li>
         {% endfor %}
     </ul>
@@ -15,7 +15,7 @@
 
 {% if selected_game %}
     <section id="game-guide" class="my-8">
-        <h2 class="text-3xl font-bold mb-4">{{ selected_game | replace("_", " ") | title }} Guide</h2>
+        <h2 class="text-3xl font-bold mb-4">{{ selected_game | replace("_", " ") }} Guide</h2>
 
         {% if selected_game == "ocarina_of_time" %}
             <section class="my-8">
@@ -143,7 +143,9 @@
             </section>
         {% endif %}
     </section>
+    {% else %}
+        <p class="text-4xl text-black-600 mt-8">Please select a Game.</p>
+        <img src="https://gamebuster.sg/cdn/shop/files/61slK3QViuL._AC_SX679.jpg?v=1706263524&width=480" class="w-64 h-64">
 {% endif %}
-<p class="text-4xl text-black-600 mt-8">Please select a Game.</p>
-<img src="https://gamebuster.sg/cdn/shop/files/61slK3QViuL._AC_SX679.jpg?v=1706263524&width=480" class="w-64 h-64">
+
 {%endblock%}
