@@ -46,7 +46,11 @@ def guides_type(name):
    
     if name not in games:
         name = None
-    return render_template('guides.html', games=games, selected_game=name)
+    cursor = mysql.connection.cursor()
+    cursor.execute(''' SELECT * FROM ARTICLES WHERE GAME = %s AND ARTICLETYPE = GUIDE''',(name))
+    articles = cursor.fetchall()
+    cursor.close()
+    return render_template('guides.html', games=games, selected_game=name, articles=articles)
 
 canons = [
     'timeline',
