@@ -14,14 +14,22 @@
 <main class="p-2">
     <section id="home" class="my-4">
         <h2 class="text-2xl font-semibold mb-4">Welcome to the Zelda Wiki!</h2>
-        <p class="text-lg">Your ultimate guide to every Zelda game. Find maps, walkthroughs, and learn all the secrets hidden throughout the Zelda universe.</p>
+        <p class="text-lg">Your ultimate guide to every Zelda game. Find maps, stories, and learn all the secrets hidden throughout the Zelda universe.</p>
     </section>
     <img src="https://kfwimg.kafan.cn/upload/image/20240806/20240806110720_89840.jpg" class="w-32 h-32">
 
     <section id="news" class="my-8">
-        <h2 class="text-2xl font-semibold mb-4">Latest Zelda News</h2>
+        <h2 class="text-2xl font-semibold mb-4">Recommand</h2>
         <div class="bg-white p-4 rounded shadow-md">
-            <p>...</p>
+            <ul class="list-disc list-inside">
+                {% for article in latest_articles %}
+                    <li>
+                        <a href="{{ url_for('displayarticle', name=article['articlesubject']) }}" class="text-green-700 text-lg hover:underline">
+                            {{ article['articlesubject'] }}
+                        </a>
+                    </li>
+                {% endfor %}
+            </ul>
         </div>
     </section>
 

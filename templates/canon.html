@@ -7,36 +7,31 @@
     <ul class="flex space-x-4">
         {% for canon in canons %}
             <li>
-                <a href="/canon/{{ canon }}" class="text-black-600 hover:underline">{{ canon }}</a>
+                <a href="/canon/{{ canon }}" class="text-black-600 hover:underline">{{ canon | title }}</a>
             </li>
         {% endfor %}
     </ul>
 </nav>
 
+
 {% if selected_canon %}
     <section id="canon-detail" class="my-8">
-        <h2 class="text-3xl font-bold mb-4">{{ selected_canon }} in Zelda</h2>
+        <h2 class="text-3xl font-bold mb-4">{{ selected_canon | title }} in Zelda</h2>
+        <div class="my-8 ml-4">
+            <ul class="list-disc list-inside">
+                {% for article in articles %}                    
+                    {% if article.articleinfo.lower() == selected_canon.lower() %}
+                        <li>
+                            <a href="{{ url_for('displayarticle', name=article.articlesubject) }}" class="text-green-700 text-xl hover:underline">
+                                {{ article.articlesubject }}
+                            </a>
+                        </li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+        </div>
 
-        {% if selected_canon == "timeline" %}
-            <section class="my-8">
-                <p class="text-lg">...</p>
-            </section>
-        {% elif selected_canon == "characters" %}
-            <section class="my-8">
-                <p class="text-lg">...</p>
-            </section>
-        {% elif selected_canon == "events" %}
-            <section class="my-8">
-                <p class="text-lg">...</p>
-            </section>
-        {% elif selected_canon == "myths" %}
-            <section class="my-8">
-                <p class="text-lg">...</p>
-            </section>
-        {% else %}
-            <p class="text-lg text-red-600">The requested canon category does not exist.</p>
-        {% endif %}
-    </section>
+        
 {% else %}
     <p class="text-4xl text-black-600 mt-8">Please select a canon category.</p>
     <img src="https://gamebuster.sg/cdn/shop/files/61slK3QViuL._AC_SX679.jpg?v=1706263524&width=480"class="w-64 h-64">

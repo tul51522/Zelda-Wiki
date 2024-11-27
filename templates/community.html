@@ -1,6 +1,13 @@
 {% extends 'base.html' %}
-
+{% block title %}Community{% endblock %}
 {% block content %}
-    <h1>Community</h1>
+    <h1 class="text-4xl font-bold text-green-700 ">Community</h1>
+
+    <a href="{{ url_for('newarticle') }}">
+        <button class="mt-4 ml-2 px-4 py-2 bg-green-700 text-white rounded hover:bg-green-800">
+            Submit New Article
+        </button>
+    </a>
+    
 
 {%endblock%}

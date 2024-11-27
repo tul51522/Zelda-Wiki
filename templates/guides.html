@@ -7,7 +7,7 @@
     <ul class="flex space-x-4">
         {% for game in games %}
             <li>
-                <a href="/guides/{{ game }}" class="text-black-600 hover:underline">{{ game | replace("_", " ") }}</a>
+                <a href="/guides/{{ game }}" class="text-black-600 hover:underline">{{ game | replace("_", " ") | title }}</a>
             </li>
         {% endfor %}
     </ul>
@@ -15,133 +15,68 @@
 
 {% if selected_game %}
     <section id="game-guide" class="my-8">
-        <h2 class="text-3xl font-bold mb-4">{{ selected_game | replace("_", " ") }} Guide</h2>
+        <h2 class="text-3xl font-bold mb-4">{{ selected_game | replace("_", " ") | title}} Guide</h2>
 
-        {% if selected_game == "ocarina_of_time" %}
-            <section class="my-8">
-                <h3 class="text-2xl font-semibold mb-4">Main Quests</h3>
-                <p class="text-lg">...</p>
-            </section>
-            <section class="my-8">
-                <h3 class="text-2xl font-semibold mb-4">Side Quests</h3>
-                <p class="text-lg">...</p>
-            </section>
-            <section class="my-8">
-                <h3 class="text-2xl font-semibold mb-4">Collection</h3>
-                <p class="text-lg">...</p>
-            </section>
-            <section class="my-8">
-                <h3 class="text-2xl font-semibold mb-4">Easter Egg</h3>
-                <p class="text-lg">...</p>
-            </section>
-        {% elif selected_game == "majoras_mask" %}
-           <section class="my-8">
-                <h3 class="text-2xl font-semibold mb-4">Main Quests</h3>
-                <p class="text-lg">...</p>
-            </section>
-            <section class="my-8">
-                <h3 class="text-2xl font-semibold mb-4">Side Quests</h3>
-                <p class="text-lg">...</p>
-            </section>
-            <section class="my-8">
-                <h3 class="text-2xl font-semibold mb-4">Collection</h3>
-                <p class="text-lg">...</p>
-            </section>
-            <section class="my-8">
-                <h3 class="text-2xl font-semibold mb-4">Easter Egg</h3>
-                <p class="text-lg">...</p>
-            </section>
-        {% elif selected_game == "wind_waker" %}
-            <section class="my-8">
-                <h3 class="text-2xl font-semibold mb-4">Main Quests</h3>
-                <p class="text-lg">...</p>
-            </section>
-            <section class="my-8">
-                <h3 class="text-2xl font-semibold mb-4">Side Quests</h3>
-                <p class="text-lg">...</p>
-            </section>
-            <section class="my-8">
-                <h3 class="text-2xl font-semibold mb-4">Collection</h3>
-                <p class="text-lg">...</p>
-            </section>
-            <section class="my-8">
-                <h3 class="text-2xl font-semibold mb-4">Easter Egg</h3>
-                <p class="text-lg">...</p>
-            </section>
-        {% elif selected_game == "twilight_princess" %}
-            <section class="my-8">
-                <h3 class="text-2xl font-semibold mb-4">Main Quests</h3>
-                <p class="text-lg">...</p>
-            </section>
-            <section class="my-8">
-                <h3 class="text-2xl font-semibold mb-4">Side Quests</h3>
-                <p class="text-lg">...</p>
-            </section>
-            <section class="my-8">
-                <h3 class="text-2xl font-semibold mb-4">Collection</h3>
-                <p class="text-lg">...</p>
-            </section>
-            <section class="my-8">
-                <h3 class="text-2xl font-semibold mb-4">Easter Egg</h3>
-                <p class="text-lg">...</p>
-            </section>
-        {% elif selected_game == "skyward_sword" %}
-            <section class="my-8">
-                <h3 class="text-2xl font-semibold mb-4">Main Quests</h3>
-                <p class="text-lg">...</p>
-            </section>
-            <section class="my-8">
-                <h3 class="text-2xl font-semibold mb-4">Side Quests</h3>
-                <p class="text-lg">...</p>
-            </section>
-            <section class="my-8">
-                <h3 class="text-2xl font-semibold mb-4">Collection</h3>
-                <p class="text-lg">...</p>
-            </section>
-            <section class="my-8">
-                <h3 class="text-2xl font-semibold mb-4">Easter Egg</h3>
-                <p class="text-lg">...</p>
-            </section>
-        {% elif selected_game == "breath_of_the_wild" %}
-            <section class="my-8">
-                <h3 class="text-2xl font-semibold mb-4">Main Quests</h3>
-                <p class="text-lg">...</p>
-            </section>
-            <section class="my-8">
-                <h3 class="text-2xl font-semibold mb-4">Side Quests</h3>
-                <p class="text-lg">...</p>
-            </section>
-            <section class="my-8">
-                <h3 class="text-2xl font-semibold mb-4">Collection</h3>
-                <p class="text-lg">...</p>
-            </section>
-            <section class="my-8">
-                <h3 class="text-2xl font-semibold mb-4">Easter Egg</h3>
-                <p class="text-lg">...</p>
-            </section>
-        {% elif selected_game == "tears_of_the_kingdom" %}
-            <section class="my-8">
-                <h3 class="text-2xl font-semibold mb-4">Main Quests</h3>
-                <p class="text-lg">...</p>
-            </section>
-            <section class="my-8">
-                <h3 class="text-2xl font-semibold mb-4">Side Quests</h3>
-                <p class="text-lg">...</p>
-            </section>
-            <section class="my-8">
-                <h3 class="text-2xl font-semibold mb-4">Collection</h3>
-                <p class="text-lg">...</p>
-            </section>
-            <section class="my-8">
-                <h3 class="text-2xl font-semibold mb-4">Easter Egg</h3>
-                <p class="text-lg">...</p>
-            </section>
-        {% else %}
-            <section class="my-8">
-                <h3 class="text-2xl font-semibold mb-4">Guide Not Found</h3>
-                <p class="text-lg">not available.</p>
-            </section>
-        {% endif %}
+        <div class="my-8 ml-4">
+            <h3 class="text-2xl font-semibold mb-4 ">Main Quests</h3>
+            <ul class="list-disc list-inside">
+                {% for article in articles %}
+                    {% if article.guidetype == "Main Quest" %}
+                        <li>
+                            <a href="{{ url_for('displayarticle', name=article.articlesubject) }}" class="text-green-700 text-xl hover:underline">
+                                {{ article.articlesubject }}
+                            </a>
+                        </li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+        </div>
+
+        <div class="my-8 ml-4">
+            <h3 class="text-2xl font-semibold mb-4 ">Side Quests</h3>
+            <ul class="list-disc list-inside">
+                {% for article in articles %}
+                    {% if article.guidetype == "Side Quest" %}
+                        <li>
+                            <a href="{{ url_for('displayarticle', name=article.articlesubject) }}" class="text-green-700 text-xl hover:underline">
+                                {{ article.articlesubject }}
+                            </a>
+                        </li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+        </div>
+
+        <div class="my-8 ml-4">
+            <h3 class="text-2xl font-semibold mb-4 ">Collections</h3>
+            <ul class="list-disc list-inside">
+                {% for article in articles %}
+                    {% if article.guidetype == "Collection" %}
+                        <li>
+                            <a href="{{ url_for('displayarticle', name=article.articlesubject) }}" class="text-green-700 text-xl hover:underline">
+                                {{ article.articlesubject }}
+                            </a>
+                        </li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+        </div>
+
+        <div class="my-8 ml-4">
+            <h3 class="text-2xl font-semibold mb-4 ">Easter Eggs</h3>
+            <ul class="list-disc list-inside">
+                {% for article in articles %}
+                    {% if article.guidetype == "Easter Egg" %}
+                        <li>
+                            <a href="{{ url_for('displayarticle', name=article.articlesubject) }}" class="text-green-700 text-xl hover:underline">
+                                {{ article.articlesubject }}
+                            </a>
+                        </li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+        </div>
+            
     </section>
     {% else %}
         <p class="text-4xl text-black-600 mt-8">Please select a Game.</p>

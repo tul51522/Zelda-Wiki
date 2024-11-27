@@ -39,12 +39,18 @@ def load_user(user_id):
 
 @app.route('/')
 def index():
-    return render_template('index.html', message="index")
+    cursor = mysql.connection.cursor()
+    cursor.execute("SELECT articlesubject FROM articles")
+    list1 = cursor.fetchall()
+    all_articles = [{'articlesubject': row[0]} for row in list1]
+    latest_articles = random.sample(all_articles, 2)
+    return render_template('index.html', latest_articles=latest_articles)
 
 @app.route('/maps')
 def maps():
     return render_template('maps.html')
 
+#Guide
 games = [
         'ocarina_of_time',
         'majoras_mask',
@@ -53,7 +59,7 @@ games = [
         'skyward_sword',
         'breath_of_the_wild',
         'tears_of_the_kingdom'
-    ]
+]
 
 @app.route('/guides')
 def guides():
@@ -65,12 +71,30 @@ def guides_type(name):
    
     if name not in games:
         name = None
+
+    formatted_name = name.replace("_", " ").title()
     cursor = mysql.connection.cursor()
-    cursor.execute(''' SELECT * FROM ARTICLES WHERE ARTICLEINFO = %s AND ARTICLETYPE = %s''',(name, "guide"))
+    cursor.execute('''SELECT * FROM articles WHERE articleinfo = %s AND articletype = %s''', (formatted_name, "guide"))
     articles = cursor.fetchall()
     cursor.close()
+
+    articles = [
+        {
+            'articlesubject': row[0],
+            'imageURL': row[1],
+            'articleText': row[2],
+            'authorID': row[3],
+            'articletype': row[4],
+            'articleinfo': row[5],
+            'guidetype': row[6]
+        }
+        for row in articles
+    ]
+
+
     return render_template('guides.html', games=games, selected_game=name, articles=articles)
 
+#Canon
 canons = [
     'timeline',
     'characters',
@@ -86,7 +110,27 @@ def canon():
 def canon_type(canon_name):
     if canon_name not in canons:
         canon_name=None
-    return render_template('canon.html', canons=canons, selected_canon=canon_name)
+
+    formatted_name = canon_name.replace("_", " ").title()
+    cursor = mysql.connection.cursor()
+    cursor.execute('''SELECT * FROM articles WHERE articleinfo = %s AND articletype = %s''', (formatted_name, "canon"))
+    articles = cursor.fetchall()
+    cursor.close()
+
+    articles = [
+        {
+            'articlesubject': row[0],
+            'imageURL': row[1],
+            'articleText': row[2],
+            'authorID': row[3],
+            'articletype': row[4],
+            'articleinfo': row[5],
+            'guidetype': row[6]
+        }
+        for row in articles
+    ]
+    
+    return render_template('canon.html', canons=canons, selected_canon=canon_name, articles=articles)
 
 @app.route('/community')
 def community():

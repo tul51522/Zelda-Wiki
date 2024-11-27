@@ -1,35 +1,45 @@
 {% extends 'base.html' %}
-
+{% block title %}Newarticle{% endblock %}
 {% block content %}
-    <form action="{{ url_for('newarticle')}}" method="post">
-        <label for="game"> Choose an Article Type</label>
-        <select name="articletype" id="articletype">
-            <option value="guide">Guide</option>
-            <option value="canon">Canon</option>
-        </select>
+    <div class="flex justify-center items-center py-12">
+        <form action="{{ url_for('newarticle')}}" method="post" class="bg-white p-6 w-2/3 rounded-lg shadow-lg flex flex-col items-center space-y-4">
+            <div>
+                <label for="game"class="text-lg"> Choose an Article Type</label>
+                <select name="articletype" id="articletype" class="p-2 border rounded">
+                    <option value="guide">Guide</option>
+                    <option value="canon">Canon</option>
+                </select>
+            </div>
+            
+            <div>  
+                <label for="info" id="infotext" class="text-lg"></label>
+                <select name="info" id="info" class="p-2 border rounded"></select>
+            </div>
+          
 
-        <label for="info" id="infotext"></label>
-        <select name="info" id="info">
-            <!-- Options will be populated based on the selected article type -->
-        </select>
-        <div id="guide-dropdown" style="display: none;">
-            <label for="guidetype">Choose the Guide Type</label>
-            <select name="guidetype" id="guidetype">
-                <option value="Main Quest">Main Quest</option>
-                <option value="Side Quest">Side Quest</option>
-                <option value="Collections">Collections</option>
-                <option value="Easter Eggs">Easter Eggs</option>
-            </select>
-        </div>
-        <label for="subject">Article Subject: </label>
-        <input type="text" id="subject" name="asubject" placeholder="Article Name">
-        <label for="imageurl">Image URL: </label>
-        <input type="url" id="imageurl" name="iurl" placeholder="URL">
-        <label for="content">Content: </label>
-        <input type="text" id="content" name="acontent" placeholder="Article Content">
-    <button type="submit">Submit Article</button>
+            <div id="guide-dropdown" style="display: none;">
+                <label for="guidetype" class="text-lg">Choose the Guide Type</label>
+                <select name="guidetype" id="guidetype" class="p-2 border rounded">
+                    <option value="Main Quest">Main Quest</option>
+                    <option value="Side Quest">Side Quest</option>
+                    <option value="Collections">Collections</option>
+                    <option value="Easter Eggs">Easter Eggs</option>
+                </select>
+            </div>
+
+            <label for="subject" class="text-lg">Article Subject: </label>
+            <input type="text" id="subject" name="asubject" placeholder="Article Name" class="p-2 border rounded ">
+            <label for="imageurl" class="text-lg">Image URL: </label>
+            <input type="url" id="imageurl" name="iurl" placeholder="URL" class="p-2 border rounded ">
+            <label for="content" class="text-lg">Content: </label>
+            <textarea type="text" id="content" name="acontent" placeholder="Article Content" class="p-2 border rounded w-full h-32"></textarea>
+            <button type="submit" class="bg-green-700 text-white px-6 py-2 rounded-lg hover:bg-green-800 mt-4">Submit Article</button>
+        </form>
+    </div>
 
     <script>
+        document.addEventListener('DOMContentLoaded', () => {updateItems();});
+        
         document.getElementById("articletype").addEventListener("change", updateItems);
 
         function updateItems() {
