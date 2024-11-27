@@ -9,11 +9,10 @@
 </head>
 <body class="bg-gray-100 text-gray-900">
     <header class="bg-green-700 text-white p-4">
-        <!-- Container for title and navigation, using flex layout -->
+
         <div class="flex justify-between items-center">
             <h1 class="text-3xl font-bold">Zelda Wiki</h1>
             
-            <!-- Right-aligned navigation (Login, Logout, etc.) -->
             <nav class="flex space-x-4">
                 <ul class="flex space-x-4">
                     {% if current_user.is_authenticated %}
@@ -27,7 +26,6 @@
             </nav>
         </div>
         
-        <!-- Main navigation under the title (Home, Maps, Guides, etc.) -->
         <nav class="flex space-x-4 mt-2">
             <ul class="flex space-x-4">
                 <li><a href="/" class="hover:underline">Home</a></li>
