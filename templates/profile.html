@@ -1,0 +1,18 @@
+{% extends 'base.html'%}
+
+{% block content %}
+    <h1 class="font-bold text-center text-5xl">Profile</h1>
+    <p>Username: {{user[1]}}</p>
+    <p>Email: {{user[2]}}</p>
+    <h2 class="font-bold text-center text-5xl">Articles Created</h2>
+    {% for article in articles %}
+                    
+            <li>
+                <a href="{{ url_for('displayarticle', name=article[0]) }}" class="text-green-700 text-xl hover:underline">
+                    {{ article[0] }}
+                </a>
+            </li>
+                
+        {% endfor %}
+
+{% endblock %}

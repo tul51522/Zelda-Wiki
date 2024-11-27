@@ -1,17 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
-
     <h1 class="text-4xl font-bold text-green-700 ">LOGIN</h1>
-    {% with messages = get_flashed_messages(with_categories=true) %}
-    {% if messages %}
-        <ul class="flashes">
-        {% for category, message in messages %}
-        <li class="{{ category }}">{{ message }}</li>
-        {% endfor %}
-        </ul>
-    {% endif %}
-    {% endwith %}
     <div class="flex justify-center items-center py-12">
         <form action="{{ url_for('login')}}" method="post" class="bg-white p-6 w-2/3 rounded-lg shadow-lg flex flex-col items-center space-y-4">
             <label for="username" class="text-lg">Enter Username: </label>
@@ -19,7 +9,6 @@
             <label for="password" class="text-lg">Enter Password: </label>
             <input type="password" id="password" name="password" placeholder="password" class="p-2 border rounded ">
         <button type="submit" class="bg-green-700 text-white px-6 py-2 rounded-lg hover:bg-green-800 mt-4">Login</button>
-        
     </div>
 
 

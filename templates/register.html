@@ -2,16 +2,8 @@
 
 {% block content %}
 
+
     <h1  class="text-4xl font-bold text-green-700">Sign Up</h1>
-    {% with messages = get_flashed_messages(with_categories=true) %}
-    {% if messages %}
-        <ul class="flashes">
-        {% for category, message in messages %}
-        <li class="{{ category }}">{{ message }}</li>
-        {% endfor %}
-        </ul>
-    {% endif %}
-    {% endwith %}
     <div class="flex justify-center items-center py-12">
         <form action="{{ url_for('register')}}" method="post" class="bg-white p-6 w-2/3 rounded-lg shadow-lg flex flex-col items-center space-y-4">
             <label for="username" class="text-lg">Enter Username: </label>

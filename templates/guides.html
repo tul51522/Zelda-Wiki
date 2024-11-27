@@ -51,7 +51,7 @@
             <h3 class="text-2xl font-semibold mb-4 ">Collections</h3>
             <ul class="list-disc list-inside">
                 {% for article in articles %}
-                    {% if article.guidetype == "Collection" %}
+                    {% if article.guidetype == "Collections" %}
                         <li>
                             <a href="{{ url_for('displayarticle', name=article.articlesubject) }}" class="text-green-700 text-xl hover:underline">
                                 {{ article.articlesubject }}
@@ -66,7 +66,7 @@
             <h3 class="text-2xl font-semibold mb-4 ">Easter Eggs</h3>
             <ul class="list-disc list-inside">
                 {% for article in articles %}
-                    {% if article.guidetype == "Easter Egg" %}
+                    {% if article.guidetype == "Easter Eggs" %}
                         <li>
                             <a href="{{ url_for('displayarticle', name=article.articlesubject) }}" class="text-green-700 text-xl hover:underline">
                                 {{ article.articlesubject }}

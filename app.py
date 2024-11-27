@@ -24,9 +24,12 @@ mysql.init_app(app)
 
 @login_manager.unauthorized_handler
 def unauthorized():
-    flash("Please login to create an article")
-    return redirect(url_for('login'))
-
+    next_page = request.url
+    print(f'Login Managers Next Page is: {next_page}')
+    flash("Please login to access this page", 'fail')
+    login_url = url_for('login', next=next_page)
+    return redirect(login_url)
+                    
 @login_manager.user_loader
 def load_user(user_id):
     cursor = mysql.connection.cursor()
@@ -160,11 +163,16 @@ def displayarticle(name):
     cursor = mysql.connection.cursor()
     cursor.execute("SELECT * FROM articles WHERE articlesubject = %s", (name,))
     articleinfo = cursor.fetchone()
-    return render_template('displayarticle.html', info=articleinfo)
+    cursor.execute("SELECT * FROM USERS WHERE ID = %s",(articleinfo[3],))
+    username = cursor.fetchone()[1]
+    return render_template('displayarticle.html', info=articleinfo, username=username)
 
 @app.route('/login', methods=["GET", "POST"])
 def login():
+    print(f'Request args: {request.args}')
     if(request.method == "POST"):
+        print(f'Request args: {request.args}')
+
         cursor = mysql.connection.cursor()
         ph = PasswordHasher(hash_len = 64)
         username = request.form.get("username")
@@ -173,22 +181,28 @@ def login():
         cursor.execute('''SELECT * FROM USERS WHERE USERNAME = %s''',(username,))
         user = cursor.fetchone()
         if not user:
-            flash("Username doesn't exist")
+            flash("Username doesn't exist", 'fail')
             return redirect(url_for('login'))
         
         try:
             # Verify the password using argon2
             if ph.verify(user[3], password):
-                flash("Login Successful")
+                flash("Login Successful", 'success')
                 userObj = User(id = user[0], email=user[2], username=user[1])
                 login_user(userObj)
-                return redirect(url_for('login'))
+
+                next_page = request.args.get("next")
+                print(f'Next Page is {next_page}')
+                if next_page:
+                    return redirect(next_page)
+
+                return redirect(url_for('index'))
         except VerificationError:
-            flash("Login Failed: Incorrect password")
+            flash("Login Failed: Incorrect password", 'fail')
             return redirect(url_for('login'))
 
 
-    return render_template('login.html')
+    return render_template('login.html', next=request.args.get("next"))
 
 @app.route('/register', methods=["GET", "POST"])
 def register():
@@ -201,12 +215,12 @@ def register():
         cursor.execute(''' SELECT * FROM USERS WHERE EMAIL = %s''',(email,))
         user = cursor.fetchone()
         if user:
-            flash('Email is already in use', 'danger')
+            flash('Email is already in use', 'fail')
             return redirect(url_for('register'))
         cursor.execute('''SELECT * FROM USERS WHERE USERNAME = %s''',(username,))
         user = cursor.fetchone()
         if user:
-            flash('Username is already in use', 'danger')
+            flash('Username is already in use', 'fail')
             return render_template('register.html')
         cursor.execute('''INSERT INTO USERS (USERNAME, EMAIL, PASS_HASH) VALUES(%s, %s, %s)''',(username, email, ph.hash(password),))
         mysql.connection.commit()
@@ -218,8 +232,54 @@ def register():
 @app.route('/logout')
 def logout():
     logout_user()
-    flash('You have successfully been logged out')
+    flash('You have successfully been logged out', 'fail')
     return redirect(url_for('index'))
+
+@app.route('/editarticle/<name>', methods=["GET", "POST"])
+@login_required
+def editarticle(name):
+    cursor = mysql.connection.cursor()
+    cursor.execute(''' SELECT * FROM ARTICLES WHERE articlesubject = %s''',(name,))
+    article = cursor.fetchone()
+
+    if article is None:
+        flash("Article not found", 'fail')
+        return redirect(url_for('index'))
+
+    articleAuthor = int(article[3])
+    print("article author: ", articleAuthor)
+    print("Current User ID: ", current_user.get_id())
+
+    if (articleAuthor != int(current_user.get_id())):
+        return_to = request.referrer or '/'
+        flash('Only the article author can edit the article', 'fail')
+        return redirect(return_to)
+
+
+    if(request.method == "POST"):
+        imageurl = request.form.get("iurl") 
+        content = request.form.get("acontent")
+        cursor.execute(''' UPDATE articles SET imageURL = %s, articleText = %s WHERE articlesubject = %s''',(imageurl,content,name,))
+        mysql.connection.commit()
+        
+
+    cursor.execute(''' SELECT * FROM ARTICLES WHERE articlesubject = %s''',(name,))
+    article= cursor.fetchone()
+
+    return render_template('editarticle.html', article=article)
+
+
+@app.route('/profile')
+@login_required
+def profile():
+    cursor = mysql.connection.cursor()
+    cursor.execute('''SELECT * FROM ARTICLES WHERE authorID = %s''',(current_user.get_id(),))
+    articles = cursor.fetchall()
+    cursor.execute('''SELECT * FROM USERS WHERE ID = %s''',(current_user.get_id(),))
+    user = cursor.fetchone()
+    cursor.close()
+    
+    return render_template('profile.html', articles=articles, user=user)
 
 class User(UserMixin):
     def __init__(self, id, username, email):

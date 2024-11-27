@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+{% block title %}Edit Article{% endblock %}
+{% block content %}
+    <div class="flex justify-center items-center py-12">
+        <form action="{{ url_for('editarticle', name=article[0])}}" method="post" class="bg-white p-6 w-2/3 rounded-lg shadow-lg flex flex-col items-center space-y-4">
+            <div> 
+                <label for="game"class="text-lg">Choose an Article Type</label>
+                <select name="articletype" id="articletype" class="p-2 border rounded" disabled>
+                    <option value="guide" {% if article[4] == "guide" %}selected{% endif %}>Guide</option>
+                    <option value="canon" {% if article[4] =="canon" %}selected{% endif %}>Canon</option>
+                </select>
+            </div>
+            
+            <div>  
+                <label for="info" id="infotext" class="text-lg"></label>
+                <select name="info" id="info" class="p-2 border rounded" disabled></select>
+            </div>
+          
+
+            <div id="guide-dropdown" style="display: none;">
+                <label for="guidetype" class="text-lg">Choose the Guide Type</label>
+                <select name="guidetype" id="guidetype" class="p-2 border rounded" disabled>
+                    <option value="Main Quest" {% if article[6] == "Main Quest" %}selected{% endif %}>Main Quest</option>
+                    <option value="Side Quest" {% if article[6] == "Side Quest" %}selected{% endif %}>Side Quest</option>
+                    <option value="Collections" {% if article[6] == "Collections" %}selected{% endif %}>Collections</option>
+                    <option value="Easter Eggs" {% if article[6] == "Easter Eggs" %}selected{% endif %}>Easter Eggs</option>
+                </select>
+            </div>
+
+            <label for="subject" class="text-lg">Article Subject: </label>
+            <input type="text" id="subject" name="asubject" placeholder="Article Name" class="p-2 border rounded " value="{{ article[0] }}" disabled>
+            <label for="imageurl" class="text-lg">Image URL: </label>
+            <input type="url" id="imageurl" name="iurl" placeholder="URL" class="p-2 border rounded " value="{{ article[1] }}">
+            <label for="content" class="text-lg">Content: </label>
+            <textarea type="text" id="content" name="acontent" placeholder="Article Content" class="p-2 border rounded w-full h-32" >{{article[2]}}</textarea>
+            <button type="submit" class="bg-green-700 text-white px-6 py-2 rounded-lg hover:bg-green-800 mt-4">Submit Article</button>
+        </form>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {updateItems();});
+        
+        document.getElementById("articletype").addEventListener("change", updateItems);
+
+        function updateItems() {
+            const articleType = document.getElementById("articletype").value;
+            const itemsDropdown = document.getElementById("info");
+            const guideDropdown = document.getElementById("guide-dropdown");
+            const infoText = document.getElementById("infotext");
+            const selectedInfo = '{{ article[5] }}';
+
+            itemsDropdown.innerHTML = "";
+
+            
+
+            let options = [];
+
+            if (articleType === "guide") {
+                guideDropdown.style.display = "block";
+                infoText.innerText = "Select Guide Type"
+                options = ["Ocarina of Time", "Majoras Mask", "Wind Waker", "Twilight Princess", "Skyward Sword", "Breath of the Wild", "Tears of the Kingdom"]; 
+            } else if (articleType === "canon") {
+                guideDropdown.style.display = "none";
+                infoText.innerText = "Select Canon Type"
+                options = ["Characters", "Timeline", "Events", "Myths"]; 
+            }
+
+            options.forEach(optionText => {
+                const optionElement = document.createElement("option");
+                optionElement.textContent = optionText;
+                itemsDropdown.appendChild(optionElement);
+            });
+
+            itemsDropdown.value = selectedInfo;
+
+           
+        }
+
+        updateItems();
+    
+        
+    </script>
+
+{%endblock%}
