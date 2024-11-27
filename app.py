@@ -177,6 +177,14 @@ def login():
         ph = PasswordHasher(hash_len = 64)
         username = request.form.get("username")
         password = request.form.get("password")
+        checkbox = request.form.get('rememberme')
+
+        if checkbox:
+            print("checkbox true")
+            checked = True
+        else:
+            print("checkbox false")
+            checked = False
 
         cursor.execute('''SELECT * FROM USERS WHERE USERNAME = %s''',(username,))
         user = cursor.fetchone()
@@ -189,7 +197,7 @@ def login():
             if ph.verify(user[3], password):
                 flash("Login Successful", 'success')
                 userObj = User(id = user[0], email=user[2], username=user[1])
-                login_user(userObj)
+                login_user(userObj, remember = checked)
 
                 next_page = request.args.get("next")
                 print(f'Next Page is {next_page}')
